@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>RSAD</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Socket.IO client -->
+    <script src="https://cdn.socket.io/4.6.1/socket.io.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- DataTable -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.3.4/css/dataTables.dataTables.css" />
+    <script src="https://cdn.datatables.net/2.3.4/js/dataTables.js"></script>
+</head>
+<body>
+    <header>
+        <div id="SETTINGS">
+            <h3>Ustawienia</h3>
+            <h4>Alerty dla CPU i RAM</h4>
+            <label for="cpuThreshold">CPU (%)</label>
+            <input type="number" id="cpuThreshold" value="80" min="1" max="100"><br>
+            <label for="ramThreshold">RAM (%)</label>
+            <input type="number" id="ramThreshold" value="80" min="1" max="100"><br>
+            <button id="setThresholdsBtn">Zaktualizuj progi</button><br>
+            <h4>Aktualna częstotliwość odświeżania: <span id="currentInterval">1</span> sek.</h4>
+            <label for="intervalSelect">Częstotliwość odświeżania:</label>
+            <select id="intervalSelect">
+                <option value="1">1 sekunda</option>
+                <option value="2">2 sekundy</option>
+                <option value="3">3 sekundy</option>
+                <option value="4">4 sekundy</option>
+                <option value="5">5 sekund</option>
+                <option value="6">6 sekund</option>
+            </select><br>
+            <button id="cpuLoad">Obciążenie CPU</button>
+            <button id="ramLoad">Obciążenie RAM</button>
+        </div>
+
+        <div id="STATS">
+            <h4>Użytkownik: <span id="clientName">-</span></h4>
+            <div>Temepratura: <span id="cpuTemp"></span></div>
+             <h4>Dyski i prcoesy</h4>
+            <div>Użycie: <span id="diskUsedPercent">-</span>%</div>
+            <!-- <div>Wolne: <span id="diskFreeValue">-</span>%</div> -->
+            <div>Procesy: <span id="procCount">-</span></div>
+        </div>
+    </header>
+    <hr>        
+    <main>
+        <div id="CPU">
+            <h3>Wykorzystanie CPU ostatnie 10 minut</h3>
+            <div id="cpu_text">Aktualne: <span id="cpuValue">-</span>%</div>
+            <canvas id="cpuChart" width="400" height="150"></canvas>
+        </div>
+        <hr>
+        <div id="RAM">
+            <h3>Wykorzystanie RAM ostatnie 10 minut</h3>
+            <div id="ram_text">Aktualne: <span id="ramValue">-</span>%</div>
+            <canvas id="ramChart" width="400" height="150"></canvas>
+        </div>
+        <hr>
+        <div id="USERS">
+            <h3>Klienci</h3>
+            <table id="myTable">
+                <thead>
+                    <tr>
+                        <th>Id klienta</th>
+                        <th>Nazwa</th>
+                        <th>Status</th>
+                        <th>CPU (%)</th>
+                        <th>RAM (MB)</th>
+                    </tr>
+                </thead>
+                <tbody id="clientsTable"></tbody>    
+            </table>
+            <h3>Porównanie CPU/RAM klientów</h3>
+            <canvas id="clientsChart"></canvas>
+        </div>
+    </main>
+    <script src="../static/js/main.js"></script>
+</body>
+</html>

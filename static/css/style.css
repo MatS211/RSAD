@@ -1,0 +1,27 @@
+header{
+    display: flex;
+}
+
+
+#SETTINGS, #STATS{
+    width: 50%;
+}
+
+#SETTINGS h4, #STATS h4{
+    margin: 5px 0;
+}
+
+#USERS h3, #USERS h4{
+    text-align: center;
+}
+
+#CPU h3{
+    text-align: center;
+}
+
+#RAM h3{
+    text-align: center;
+}
+button{
+    margin: 10px 10px 10px 0;
+}
